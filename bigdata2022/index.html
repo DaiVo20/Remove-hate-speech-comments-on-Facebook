@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> DashBoard BigData</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <h2><span class="fab fa-accusoft">DashBoard</span></h2>
+        </div>
+
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="" class="active"><span class="fas fa-igloo"></span>
+                        <span>Dashboard</span> </a>
+                </li>
+                <li>
+                    <a href=""><span class="fas fa-users"></span>
+                        <span>Customers</span></a>
+                </li>
+                <li>
+                    <a href=""><span class="fas fa-clipboard-list"></span>
+                        <span>Projects</span></a>
+                </li>
+                <li>
+                    <a href=""><span class="fas fa-shipping-fast"></span>
+                        <span>Oders</span></a>
+                </li>
+                <li>
+                    <a href=""><span class="fas fa-receipt"></span>
+                        <span>Inventory</span></a>
+                </li>
+                <li>
+                    <a href=""><span class="fas fa-user-circle"></span>
+                        <span>Accounts</span></a>
+                </li>
+                <li>
+                    <a href=""><span class="fas fa-clipboard-list"></span>
+                        <span>Tasks</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-content">
+        <header>
+            <h2>
+                <label for="">
+                    <span class="fas fa-bars"></span>
+                </label>
+                Dashboard
+            </h2>
+            <div class="search-wrapper">
+                <span class="fas fa-search"></span>
+                <input type="search" placeholder="Search here" />
+             </div>
+
+            <div class="user-wrapper">
+                <img src="meo.jpg" width="40px" height="40px" alt="">
+                <div>
+                    <h4>ABU</h4>
+                    <small>Super admin</small>
+                </div>
+            </div>
+    
+
+            
+        </header>
+        <main>
+            <div class="dashboard-cards">
+                <div class="card-single">
+                    <div>
+                        <h1>54</h1>
+                        <span>User</span>
+                    </div>
+                    <div>
+                        <span class="fas fa-users"></span>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div>
+                        <h1>79</h1>
+                        <span>Positive</span>
+                    </div>
+                    <div>
+                        <span class="fas fa-clipboard-list"></span>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div>
+                        <h1>124</h1>
+                        <span>Neutral</span>
+                    </div>
+                    <div>
+                        <span class="fas fa-shopping-bag"></span>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div>
+                        <h1>70</h1>
+                        <span>Negative</span>
+                    </div>
+                    <div>
+                        <span class="fab fa-google-wallet"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Charts-->
+            <div class="graphBox">
+                <div class="box">
+                    <canvas id="myChart"></canvas>
+                </div>
+                <div class="box">
+                    <canvas id="earning"></canvas>
+                </div>
+            </div>
+
+            <!--Table-->
+            <div class="recent-grid">
+                <div class="project">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Detecting spam comments with malicious users' behavioral characteristics</h2>
+                            <button>See all <span class="la-arrow-right">     
+                            </span></button>
+
+                        </div>
+                        <div class="card-body">
+                            <table width="100%">
+                                <thead>
+                                    <tr>
+                                        <td>Project Title</td>
+                                        <td>Department</td>
+                                        <td>Status</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>UI/UX Design</td>
+                                        <td>UI Team</td>
+                                        <td>
+                                            <span class="status purple"></span>
+                                            review
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Web development</td>
+                                        <td>Frontend</td>
+                                        <td>
+                                            <span class="status pink"></span>
+                                            in progress
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ushop app</td>
+                                        <td>Mobile Team</td>
+                                        <td>
+                                            <span class="status orange"></span>
+                                            pending
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>UI/UX Design</td>
+                                        <td>UI Team</td>
+                                        <td>
+                                            <span class="status purple"></span>
+                                            review
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Web development</td>
+                                        <td>Frontend</td>
+                                        <td>
+                                            <span class="status pink"></span>
+                                            in progress
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ushop app</td>
+                                        <td>Mobile Team</td>
+                                        <td>
+                                            <span class="status orange"></span>
+                                            pending
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>UI/UX Design</td>
+                                        <td>UI Team</td>
+                                        <td>
+                                            <span class="status purple"></span>
+                                            review
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Web development</td>
+                                        <td>Frontend</td>
+                                        <td>
+                                            <span class="status pink"></span>
+                                            in progress
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ushop app</td>
+                                        <td>Mobile Team</td>
+                                        <td>
+                                            <span class="status orange"></span>
+                                            pending
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="customers">
+
+                </div>
+            </div>
+
+
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+    <script src="my_chart.js"></script>
+    
+</body>
+</html>
