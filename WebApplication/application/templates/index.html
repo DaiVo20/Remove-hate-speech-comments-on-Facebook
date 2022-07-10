@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<!-- <script src="{{url_for('static', filename='js/scripts.js')}}"></script> -->
+<script src="{{url_for('static', filename='js/Chart.js')}}"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> DashBoard BigData</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href= "{{ url_for('static', filename='styles/styles.css') }}">
+
+    
+</head>
+<body>
+    <main>
+        <header width = 100%>
+            <h2>
+                <label for="">
+                    <span class="fas fa-bars"></span>
+                </label>
+                Dashboard
+            </h2>
+            <div class="search-wrapper">
+                <span class="fas fa-search"></span>
+                <input type="search" placeholder="Search here" />
+                </div>
+    
+            <div class="user-wrapper">
+                <img src="{{url_for('static', filename='bigdata.png')}}" width="40px" height="40px" alt="">
+                <div>
+                    <h4>ABU</h4>
+                    <small>Super admin</small>
+                </div>
+            </div>
+        </header>
+        <div class="dashboard-cards">
+            <div class="card-single">
+                <div>
+                    <h1 id="count_clean" >{{ count_clean }}</h1>
+                    <span>CLEAN</span>
+                </div>
+                <div>
+                    <span class="fas fa-users"></span>
+                </div>
+            </div>
+            <div class="card-single">
+                <div>
+                    <h1 id="count_offensive">{{ count_offensive }}</h1>
+                    <span>OFFENSIVE</span>
+                </div>
+                <div>
+                    <span class="fas fa-clipboard-list"></span>
+                </div>
+            </div>
+            <div class="card-single">
+                <div>
+                    <h1 id="count_hate">{{ count_hate }}</h1>
+                    <span>HATE</span>
+                </div>
+                <div>
+                    <span class="fas fa-shopping-bag"></span>
+                </div>
+            </div>
+            <div class="card-single">
+                <div>
+                    <h1>{{ count_user }}</h1>
+                    <span>USER</span>
+                </div>
+                <div>
+                    <span class="fab fa-google-wallet"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Charts-->
+        <div class="graphBox">
+            <div class="box">
+                <!-- <canvas id="myChart"></canvas> -->
+                <canvas id="myChart"></canvas>
+            </div>
+            <div class="box">
+                <canvas id="earning"></canvas>
+            </div>
+        </div>
+
+        <div class="col-sm-10 ml-auto mr-auto">
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">User</th>
+                  <th scope="col">Comments</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for entry in entries %}
+                <tr>
+                  <th scope="row">{{loop.index}}</th>
+                  <td>{{entry.date.strftime("%H:%M:%S %m-%d-%Y")}}</td>
+                  <td>{{entry.user}}</td>
+                  <td>{{entry.comments}}</td>
+                  <td>{{entry.type}}</td>
+                  <td>
+                    <a
+                      href="{{ url_for('delete', entry_id = entry.id) }}"
+                      class="btn btn-outline-danger btn-sm"
+                      >Delete</a
+                    >
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        <!--Table-->
+        <!-- <div class="recent-grid">
+            <div class="project">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Detecting spam comments with malicious users' behavioral characteristics</h2>
+                        <button>See all <span class="la-arrow-right">     
+                        </span></button>
+
+                    </div>
+                    <div class="card-body">
+                        <table width="100%">
+                            <thead>
+                                <tr>
+                                    <td>Project Title</td>
+                                    <td>Department</td>
+                                    <td>Status</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>UI/UX Design</td>
+                                    <td>UI Team</td>
+                                    <td>
+                                        <span class="status purple"></span>
+                                        review
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Web development</td>
+                                    <td>Frontend</td>
+                                    <td>
+                                        <span class="status pink"></span>
+                                        in progress
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Ushop app</td>
+                                    <td>Mobile Team</td>
+                                    <td>
+                                        <span class="status orange"></span>
+                                        pending
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>UI/UX Design</td>
+                                    <td>UI Team</td>
+                                    <td>
+                                        <span class="status purple"></span>
+                                        review
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Web development</td>
+                                    <td>Frontend</td>
+                                    <td>
+                                        <span class="status pink"></span>
+                                        in progress
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Ushop app</td>
+                                    <td>Mobile Team</td>
+                                    <td>
+                                        <span class="status orange"></span>
+                                        pending
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>UI/UX Design</td>
+                                    <td>UI Team</td>
+                                    <td>
+                                        <span class="status purple"></span>
+                                        review
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Web development</td>
+                                    <td>Frontend</td>
+                                    <td>
+                                        <span class="status pink"></span>
+                                        in progress
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Ushop app</td>
+                                    <td>Mobile Team</td>
+                                    <td>
+                                        <span class="status orange"></span>
+                                        pending
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <div class="customers">
+
+            </div>
+        </div> -->
+
+
+    </main>
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    {% for item in labels_doughnut %}
+                  	    "{{item}}",
+                 	{% endfor %}
+                ],
+                datasets: [{
+                    label: 'Count',
+                    data: [
+                        {% for item in values_doughnut %}
+     	                    {{item}},
+                    	{% endfor %}
+                    ],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        var src_Labels = [];
+        var src_Values = [];
+        var src_clean;
+        var scr_offensive;
+        var src_hate;
+        
+        
+        setInterval(function(){
+            $.getJSON('/refreshData', {
+            }, function(data) {
+                src_Labels = data.labels_doughnut;
+                src_Values = data.values_doughnut;
+                
+                src_clean = data.count_clean;
+                scr_offensive = data.count_offensive;
+                src_hate = data.count_hate;
+            });
+
+            document.getElementById("count_clean").innerHTML = src_clean;
+            document.getElementById("count_offensive").innerHTML = scr_offensive;
+            document.getElementById("count_hate").innerHTML = src_hate;
+
+            myChart.data.labels = src_Labels;
+            myChart.data.datasets[0].data = src_Values;
+            myChart.update();
+
+        },1000);
+    </script>
+</body>
+</html>
