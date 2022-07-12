@@ -247,7 +247,7 @@ def main():
 
     crawler = FacebookComment(config['cookie_facebook'], config['key_word'],
                               config['number_post_id'], config['headless'],
-                              config['number_commnt_take'])
+                              config['number_comment_take'])
     i = 0
     while True:
         json_datas = crawler.get_comment()
@@ -260,6 +260,6 @@ def main():
                 print(f"{i} comments have been retrieved.")
         time.sleep(1)
 
-
+# python facebook_comment.py
 if __name__ == "__main__":
     main()

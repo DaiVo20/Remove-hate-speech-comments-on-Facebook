@@ -15,10 +15,10 @@ var colorNames = require(6);
 
 module.exports = {
    getRgba: getRgba,
-   getHsla: getHsla,
+   getHsla: getHsla,ee
    getRgb: getRgb,
    getHsl: getHsl,
-   getHwb: getHwb,
+   getHwb: getHwb,e
    getAlpha: getAlpha,
 
    hexString: hexString,

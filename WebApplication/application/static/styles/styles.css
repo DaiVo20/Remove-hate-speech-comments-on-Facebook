@@ -1,11 +1,31 @@
 
 :root {
-    --main-color: #DD2F6E;
+    --main-color: #12ADDA;
     --color-dark: #1D2231;
     --text-grey: #AAAAAA;
 
 }
 
+.mystyle {
+    font-size: 11pt; 
+    font-family: Arial;
+    border-collapse: collapse; 
+    border: 1px solid silver;
+
+}
+
+.mystyle td, th {
+    padding: 5px;
+}
+
+.mystyle tr:nth-child(even) {
+    background: #E0E0E0;
+}
+
+.mystyle tr:hover {
+    background: silver;
+    cursor: pointer;
+}
 
 
 * {
@@ -78,12 +98,13 @@
 header {
     display: flex;
     justify-content: space-between;
-    padding: 1rem 1.5rem;
+    padding: 1.25rem;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
     position: fixed;
     width: calc(100% - 0px);
     top: 0;
     z-index: 100;
+    background-color: #fff;
 }
 
 header h2 {
@@ -98,9 +119,8 @@ header label span {
 
 .search-wrapper {
     border: 1px solid #ccc;
-    border-radius: 30px;
+    border-radius: 20px;
     height: 50px;
-    position: right;
     display: flex;
     align-items: center;
     overflow-x: hidden;
@@ -123,6 +143,7 @@ header label span {
 .user-wrapper {
     display: flex;
     align-items: center;
+    margin-right: 60px;
 }
 .user-wrapper img {
     border-radius: 50%;
@@ -145,16 +166,14 @@ main {
 .dashboard-cards {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 2rem;
-    margin-top: 1rem;
-    
+    grid-gap: 2rem;    
 }
 .card-single {
     display: flex;
     justify-content: space-between;
     background: #fff;
     padding: 2rem;
-    border-radius: 2px;
+    border-radius: 20px;
 }
 
 .card-single div:last-child span {
@@ -177,15 +196,16 @@ main {
 }
 
 .recent-grid {
-    margin-top: 3.5rem;
+    margin-top: 1rem;
     display: grid;
     grid-gap: 2rem;
     grid-template-columns: 100% auto;
+    border-radius: 20px;
 }
 
 .card {
     background: #fff;
-    border-radius: 5px;
+    border-radius: 20px;
 }
 
 .card-header{
@@ -239,21 +259,22 @@ tr td:last-child {
     align-items: center;
 }
 
-.status.purple {
-    background: rebeccapurple;
+.status.red {
+    background: rgba(255, 99, 99, 1);
 }
 
-.status.pink {
-    background: deeppink;
+.status.green {
+    background: rgba(127, 255, 99, 1);
 }
 .status.orange {
-    background: orangered;
+    background: rgba(255, 238, 99, 1);
 }
 
 .graphBox {
     position: relative;
     width: 100%;
-    padding: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-gap: 30px;
@@ -270,3 +291,48 @@ tr td:last-child {
     border-radius: 20px;
 }
 
+
+
+table {
+    *border-collapse: collapse; /* IE7 and lower */
+    border-spacing: 0;
+    width: 100%;    
+}
+
+.zebra td, .zebra th {
+    padding: 10px;
+    border-bottom: 1px solid #f2f2f2;    
+}
+
+.zebra tbody tr:nth-child(even) {
+    background: #f5f5f5;
+    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset; 
+    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;  
+    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;        
+}
+
+.zebra th {
+    text-align: left;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5); 
+    border-bottom: 1px solid #12ADDA;
+    background-color: #eee;
+    background-image: #12ADDA;
+}
+
+.zebra th:first-child {
+    -moz-border-radius: 6px 0 0 0;
+    -webkit-border-radius: 6px 0 0 0;
+    border-radius: 6px 0 0 0;  
+}
+
+.zebra th:last-child {
+    -moz-border-radius: 0 6px 0 0;
+    -webkit-border-radius: 0 6px 0 0;
+    border-radius: 0 6px 0 0;
+}
+
+.zebra th:only-child{
+    -moz-border-radius: 6px 6px 0 0;
+    -webkit-border-radius: 6px 6px 0 0;
+    border-radius: 6px 6px 0 0;
+}

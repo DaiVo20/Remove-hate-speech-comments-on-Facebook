@@ -5,6 +5,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
 from pyspark.sql import types as t
 from data_preprocessing import pre_process_data
+from load_model import init_estimator, convert_prediction
 from pyspark.sql.types import StructType, StructField, StringType
 from pyspark.sql import SparkSession, DataFrame
 from pyspark.ml import PipelineModel
@@ -21,9 +22,7 @@ import pickle
 import base64
 import requests
 import json
-
 import findspark
-findspark.init()
 
 # spark-submit spark_streaming.py
 # python spark_streaming.py
@@ -37,17 +36,22 @@ refresh = config['refresh']
 
 
 def send_df_to_dashboard(df):
-    pickled = pickle.dumps(df)
-    pickled_b64 = base64.b64encode(pickled)
-    hug_pickled_str = pickled_b64.decode('utf-8')
-    url = f"http://{server}/updateData"
-    request_data = {'data': str(hug_pickled_str)}
-    response = requests.post(url, data=request_data)
-    print(f"Response - {response}")
+    try:
+        df = df.toPandas()
+        # df.to_csv('result_test.csv')
+        pickled = pickle.dumps(df)
+        pickled_b64 = base64.b64encode(pickled)
+        hug_pickled_str = pickled_b64.decode('utf-8')
+        url = f"http://{server}/updateData"
+        request_data = {'data': str(hug_pickled_str)}
+        response = requests.post(url, data=request_data)
+        print(f"Response - {response}")
+    except Exception as e:
+        print(e)
 
 
 def main():
-    timestampformat = "dd-MM-yyyy'T'HH:mm:ss"
+    findspark.init()
 
     spark = SparkSession.builder.appName(
         "FacebookCommentStreaming").getOrCreate()
@@ -88,9 +92,8 @@ def main():
     query = stream_writer.start()
     # query.awaitTermination()
 
+    est = init_estimator()
     if streaming_data_clean.isStreaming:
-        from load_model import init_estimator, convert_prediction
-        est = init_estimator()
 
         x = 0
         while True:
@@ -103,14 +106,21 @@ def main():
                 print(f"Second passed: {x*refresh}")
 
                 result = spark.sql(f"SELECT * FROM {query.name}")
+                if result.count() == 0:
+                    sleep(refresh)
+                    clear_output(wait=True)
+                    x += 1
+                    print("Data not available!")
+                    continue
                 predictions = est.predict(data=result, feature_cols=['comment_encoded'])
-                pd_prediction = convert_prediction(predictions).toPandas()
+                predictions = convert_prediction(predictions)
+                pd_predictions = predictions.toPandas()
 
                 # result = result.select('timestamp', 'user', 'comment')
                 # pd_result = result.toPandas()
-                display(pd_prediction)
+                display(pd_predictions)
 
-                send_df_to_dashboard(pd_prediction)
+                send_df_to_dashboard(predictions)
 
                 sleep(refresh)
                 clear_output(wait=True)
